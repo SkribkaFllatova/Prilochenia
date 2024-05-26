@@ -1,4 +1,4 @@
-from math import sort
+from math import sqrt
 
 class IncorrectTriangleSides(Exception): #Создание исключения IncorrectTriangleSides
     pass
