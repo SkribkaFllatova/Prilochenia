@@ -3,15 +3,14 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
-
+from token import TOKEN_API
 import logging
 import os
 
 logging.basicConfig(level=logging.INFO) 
 
-bot_token = os.getenv('TOKEN_API')
+bot_token = os.getenv(TOKEN_API)
 
-bot = Bot(token='6850439811:AAFml9Z7gIs1MsEoGHuFgqqSsn41ErOwBDY')
 
 dp = Dispatcher(bot, storage=MemoryStorage())
 
