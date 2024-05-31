@@ -7,7 +7,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup 
 from aiogram.utils import executor 
 import os
-import token
+from token import TOKEN_API
 
 conn = psycopg2.connect(
   host="localhost",
