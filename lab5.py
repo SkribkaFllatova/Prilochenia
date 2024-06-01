@@ -18,11 +18,8 @@ conn = psycopg2.connect(
 
 cur = conn.cursor() 
 
-
 bot_token = os.getenv(TOKEN_API) 
-
-dp = Dispatcher(bot, storage=MemoryStorage()) 
-
+dp = Dispatcher(bot, storage=MemoryStorage())
 
 class AddCurrencyStep(StatesGroup): #Группа состояний для добавления валюты
   name = State() #Название валюты
@@ -46,11 +43,13 @@ async def start(message: types.Message):
 
 #Задание 1.
 
+chat_id = [682209675]
+
 @dp.message_handler(commands=['manage_currency'])
 async def manage_currency(message: types.Message):
-  admin_chat_id = str(message.chat.id) 
+  chat_id = str(message.chat.id) 
   cursor = conn.cursor() 
-  cursor.execute("SELECT * FROM admins WHERE chat_id = %s", (admin_chat_id,)) 
+  cursor.execute("SELECT * FROM admins WHERE chat_id = %s", (chat_id,)) 
   admin = cursor.fetchone() 
   if admin is None: 
     await message.answer("Нет доступа к команде") #Eсли пользователь не является администратором, то в чат выводится: "Нет доступа к команде"
@@ -61,7 +60,7 @@ async def manage_currency(message: types.Message):
   markup = types.ReplyKeyboardMarkup(row_width=3) 
   button1 = types.KeyboardButton("Добавить валюту")
   button2 = types.KeyboardButton("Удалить валюту") 
-  button3 = types.KeyboardButton("Изменить курс валюты") 
+  button3 =  types.KeyboardButton("Изменить курс валюты") 
   markup.add(button1, button2, button3) 
 
   await message.answer("Выберите нужную команду", reply_markup=markup) # Отправка сообщения с клавиатурой для выбора действия
@@ -97,7 +96,7 @@ async def add_rate_step(message: types.Message, state: FSMContext):
     await message.answer(f"Валюта {currency_name} добавлена") 
   except ValueError:
     await message.answer("Валюта не может быть добавлена") 
-
+  await state.finish() 
 
 @dp.message_handler(lambda message: message.text == "Удалить валюту")
 async def delete_currency(message: types.Message):
