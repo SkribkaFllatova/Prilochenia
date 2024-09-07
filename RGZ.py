@@ -11,7 +11,7 @@ import requests
 import decimal
 
 logging.basicConfig(level=logging.INFO)
-bot = Bot(token="6850439811:AAFml9Z7gIs1MsEoGHuFgqqSsn41ErOwBDY")
+
 dp = Dispatcher()
 
 #Подключение к базе данных
