@@ -6,14 +6,14 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 import requests
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from dotenv import load_dotenv # Импорт функции load_dotenv для загрузки переменных окружения из файла .env
-import os 
+import os
+from token import TOKEN_API 
 # Загрузка переменных окружения из файла .env
 load_dotenv()
 logging.basicConfig(level=logging.INFO) # Настройка базового конфигурационного параметра для логирования (уровень INFO)
 
-bot_token = os.getenv('TOKEN_API') 
-bot = Bot(token='6850439811:AAFml9Z7gIs1MsEoGHuFgqqSsn41ErOwBDY')
-dp = Dispatcher(bot, storage=MemoryStorage()) 
+bot_token = os.getenv(TOKEN_API) 
+dp = Dispatcher(bot, storage=MemoryStorage())
 
 # URL-адреса для микросервисов currency-manager и data-manager
 CURRENCY_MANAGER_URL = 'http://localhost:5001'
