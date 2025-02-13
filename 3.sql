@@ -1,0 +1,1 @@
+ALTER TABLE skribkafilatova ADD COLUMM rpp VARCHAR;
